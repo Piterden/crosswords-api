@@ -16,18 +16,18 @@ const {
 const {
   SSL_KEY,
   SSL_CERT,
+  APP_PORT,
+  DB_HOST,
   DB_CLIENT,
-  // DB_CHARSET,
   DB_DATABASE,
   DB_PASSWORD,
   DB_USERNAME,
-  // DB_MIGRATIONS_TABLE,
 } = process.env
 
 const db = knex({
   client: DB_CLIENT,
   connection: {
-    host: '127.0.0.1',
+    host: DB_HOST,
     user: DB_USERNAME,
     password: DB_PASSWORD,
     database: DB_DATABASE,
@@ -48,4 +48,4 @@ app.get('/crossword/grids', getAllGrids(app))
 https.createServer({
   key: fs.readFileSync(SSL_KEY),
   cert: fs.readFileSync(SSL_CERT),
-}, app).listen(3000)
+}, app).listen(APP_PORT)
