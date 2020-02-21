@@ -49,21 +49,21 @@ INSERT INTO \`default_crosswords_words_ru\` VALUES `
 let wordId = 1
 
 fs.readdirSync('.').filter((file) => file.endsWith('json')).forEach((file) => {
-  /* eslint-disable-next-line import/no-dymamic-require global-requiue */
+  // eslint-disable-next-line import/no-dynamic-require, global-require
   const data = require(`./${file.replace('.json', '')}`)
 
   if (!Array.isArray(data)) {
     return
   }
 
-  data.forEach((w) => {
-    wordsSql += `(${wordId},${wordId},'2019-01-06 08:48:01',NULL,'2019-01-06 08:48:01',NULL,'${w.answer}')`;
+  data.forEach((word) => {
+    wordsSql += `(${wordId},${wordId},'2019-01-06 08:48:01',NULL,'2019-01-06 08:48:01',NULL,'${word.answer}')`
     wordsSql += wordId % 4000 === 0
       ? `;
 INSERT INTO \`default_crosswords_words_ru\` VALUES `
-      : ',';
-    wordId++;
-  });
+      : ','
+    wordId++
+  })
 })
 
 wordsSql = wordsSql.replace(/,$/, '').replace('{INCR_FOR_PASTE}', wordId)
@@ -82,9 +82,9 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-01-11  0:34:35
-`;
+`
 
-fs.writeFileSync('words_new.sql', wordsSql);
+fs.writeFileSync('words_new.sql', wordsSql)
 
-console.log(`Was wrote ${wordId} entries.`);
-console.timeEnd('run');
+console.log(`Was wrote ${wordId} entries.`)
+console.timeEnd('run')
