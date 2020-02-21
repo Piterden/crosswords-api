@@ -62,3 +62,7 @@ typings/
 files/
 
 package-lock.json
+
+words/ru/*.json
+words/ru/*.sql
+words/*.xz

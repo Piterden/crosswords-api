@@ -8,17 +8,17 @@ module.exports = {
    */
   find: (app) => async (request, response) => {
     const database = app.get('db')
-    const result = await database('default_crosswords_words')
+    const result = await database('words_ru')
       .select([
-        'default_repeater_clues.id',
+        'clues_ru.id',
         'name',
       ])
       .where('word', request.params.word)
       .innerJoin(
-        'default_repeater_clues',
-        'default_crosswords_words.id',
+        'clues_ru',
+        'words_ru.id',
         '=',
-        'default_repeater_clues.word_id'
+        'clues_ru.word_id'
       )
 
     response.json({

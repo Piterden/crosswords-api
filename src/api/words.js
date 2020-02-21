@@ -8,7 +8,7 @@ module.exports = {
    */
   count: (app) => async (request, response) => {
     const database = app.get('db')
-    const result = await database('default_crosswords_words')
+    const result = await database('words_ru')
       .where('word', 'like', request.params.word)
       .count('* as count')
 
@@ -25,7 +25,7 @@ module.exports = {
    */
   suggestions: (app) => async (request, response) => {
     const database = app.get('db')
-    const words = await database('default_crosswords_words')
+    const words = await database('words_ru')
       .select(['id', 'word'])
       .where('word', 'like', request.params.word)
 
