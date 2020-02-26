@@ -7,6 +7,7 @@ const https = require('https')
 const express = require('express')
 
 const {
+  saveGrid,
   getAllGrids,
   getCluesByWord,
   getCountByMask,
@@ -37,6 +38,8 @@ const db = knex({
 const app = express()
 
 app.use(cors())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 app.set('db', db)
 
@@ -44,6 +47,8 @@ app.get('/crossword/words/count/:word', getCountByMask(app))
 app.get('/crossword/words/find/:word', getSuggestionsByMask(app))
 app.get('/crossword/clues/find/:word', getCluesByWord(app))
 app.get('/crossword/grids', getAllGrids(app))
+
+app.post('/crossword/grids', saveGrid(app))
 
 https.createServer({
   key: fs.readFileSync(SSL_KEY),
