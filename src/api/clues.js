@@ -18,7 +18,7 @@ module.exports = {
         'clues_ru',
         'words_ru.id',
         '=',
-        'clues_ru.word_id'
+        'clues_ru.word_id',
       )
 
     response.json({
