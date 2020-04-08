@@ -15,9 +15,15 @@ module.exports = {
     response.end()
   },
 
+  /**
+   * Save a grid to the DB
+   *
+   * @param {Express} app The application
+   * @return {void}
+   */
   save: (app) => async (request, response) => {
     const database = app.get('db')
-    const result = await database('grids')
+    const id = await database('grids')
       .insert({
         name: request.body.name,
         description: request.body.description,
@@ -25,9 +31,16 @@ module.exports = {
         width: request.body.width,
         height: request.body.height,
       })
-    console.log(request.body)
+      .returning('id')
+    const grid = await database('grids')
+      .select('*')
+      .where('id', id)
+      .first()
 
-    response.json(result)
+    response.json({
+      success: true,
+      data: { grid },
+    })
     response.end()
   },
 }

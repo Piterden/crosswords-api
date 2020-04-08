@@ -1,7 +1,6 @@
 root: true
 parser: babel-eslint
 extends:
-  - '@atomix'
   - standard
 env:
   es6: true
@@ -13,16 +12,16 @@ parserOptions:
     globalReturn: false
     modules: true
 rules:
-  max-len: off
-  import/no-cycle: off
-  no-param-reassign: off
-  prettier/prettier: off
-  prefer-rest-params: off
-  prefer-destructuring: off
-  no-underscore-dangle: off
-  unicorn/filename-case: off
-  function-paren-newline: off
-  import/no-default-export: off
+  # max-len: off
+  # import/no-cycle: off
+  # no-param-reassign: off
+  # prettier/prettier: off
+  # prefer-rest-params: off
+  # prefer-destructuring: off
+  # no-underscore-dangle: off
+  # unicorn/filename-case: off
+  # function-paren-newline: off
+  # import/no-default-export: off
   curly:
     - error
   comma-dangle:
